@@ -34,8 +34,6 @@ public class AhorcadoForm extends javax.swing.JFrame {
             palabra_visible+=letras_encontradas[i]+" ";
         }
         
-        
-        
         lbl_palabra.setText(palabra_visible);
     }
 
@@ -119,7 +117,23 @@ public class AhorcadoForm extends javax.swing.JFrame {
 
     private void btn_ingresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMousePressed
         // TODO add your handling code here:
-        String test = palabra_secreta;
+        char letra = tf_letra.getText().charAt(0);
+        
+        for(int i=0;i<palabra_secreta.length();i++)
+        {
+            if(palabra_secreta.charAt(i)==letra)
+            {
+                letras_encontradas[i]=letra;
+            }
+        }
+        
+        String palabra_visible = "";
+        for(int i=0;i<letras_encontradas.length;i++)
+        {
+            palabra_visible+=letras_encontradas[i]+" ";
+        }
+        
+        lbl_palabra.setText(palabra_visible);
     }//GEN-LAST:event_btn_ingresarMousePressed
 
     /**
