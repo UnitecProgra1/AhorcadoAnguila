@@ -5,6 +5,9 @@
  */
 package ahorcado;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author turupawn
@@ -15,8 +18,9 @@ public class AhorcadoForm extends javax.swing.JFrame {
      */
 
     //Este es un ejemplo
-    String palabra_secreta = "casa";
+    String palabra_secreta = "arroz";
     char letras_encontradas[]=new char[palabra_secreta.length()];
+    int fallos = 0;
     
     public AhorcadoForm() {
         initComponents();
@@ -25,8 +29,6 @@ public class AhorcadoForm extends javax.swing.JFrame {
         {
             letras_encontradas[i]='_';
         }
-        
-        letras_encontradas[1]='a';
         
         String palabra_visible = "";
         for(int i=0;i<letras_encontradas.length;i++)
@@ -54,7 +56,7 @@ public class AhorcadoForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbl_ahorcado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ahorcado/Imagenes/4.png"))); // NOI18N
+        lbl_ahorcado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ahorcado/Imagenes/0.png"))); // NOI18N
 
         lbl_palabra.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lbl_palabra.setText("_ _ _ _ _");
@@ -119,21 +121,51 @@ public class AhorcadoForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         char letra = tf_letra.getText().charAt(0);
         
+        boolean letra_encontrada = false;
+        
         for(int i=0;i<palabra_secreta.length();i++)
         {
-            if(palabra_secreta.charAt(i)==letra)
+            if(palabra_secreta.charAt(i) == letra)
             {
-                letras_encontradas[i]=letra;
+                letras_encontradas[i] = letra;
+                letra_encontrada = true;
+            }
+        }
+        
+        if(!letra_encontrada)
+        {
+            fallos++;
+            if(fallos <= 4)
+            {
+                lbl_ahorcado.setIcon(new ImageIcon("/home/turupawn/NetBeansProjects/Ahorcado/build/classes/ahorcado/Imagenes/"+fallos+".png"));
+            }else
+            {
+                lbl_ahorcado.setText("Has perdido");
             }
         }
         
         String palabra_visible = "";
+        
+        boolean jugador_ha_ganado = true;
+        
         for(int i=0;i<letras_encontradas.length;i++)
         {
             palabra_visible+=letras_encontradas[i]+" ";
+            
+            if(letras_encontradas[i]=='_')
+            {
+                jugador_ha_ganado = false;
+            }
         }
         
         lbl_palabra.setText(palabra_visible);
+        
+        if(jugador_ha_ganado)
+        {
+            lbl_ahorcado.setText("El jugador ha ganado");
+        }
+        
+        tf_letra.setText("");
     }//GEN-LAST:event_btn_ingresarMousePressed
 
     /**
