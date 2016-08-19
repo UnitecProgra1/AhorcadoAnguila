@@ -10,15 +10,17 @@ package ahorcado;
  * @author turupawn
  */
 public class AhorcadoForm extends javax.swing.JFrame {
-
     /**
      * Creates new form AhorcadoForm
      */
+
+    //Este es un ejemplo
+    String palabra_secreta = "casa";
+    char letras_encontradas[]=new char[palabra_secreta.length()];
+    
     public AhorcadoForm() {
         initComponents();
-        String palabra_secreta = "casa";
         
-        char letras_encontradas[]=new char[palabra_secreta.length()];
         for(int i=0;i<palabra_secreta.length();i++)
         {
             letras_encontradas[i]='_';
@@ -68,6 +70,11 @@ public class AhorcadoForm extends javax.swing.JFrame {
         jLabel3.setText("Ingrese una letra: ");
 
         btn_ingresar.setText("Ingresar");
+        btn_ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_ingresarMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,6 +116,11 @@ public class AhorcadoForm extends javax.swing.JFrame {
     private void tf_letraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_letraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_letraActionPerformed
+
+    private void btn_ingresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ingresarMousePressed
+        // TODO add your handling code here:
+        String test = palabra_secreta;
+    }//GEN-LAST:event_btn_ingresarMousePressed
 
     /**
      * @param args the command line arguments
